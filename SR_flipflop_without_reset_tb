@@ -1,0 +1,41 @@
+///100 Days of RTL///
+
+///Abilash P///
+
+///SR Flipflop without reset///
+
+module sr_flipflop_tb();
+  
+reg S,R, CLK;
+wire Q, QBAR;
+
+sr_flipflop dut(.CLK(CLK), .S(S), .R(R), .Q(Q), .QBAR(QBAR)); // instantiation by
+  
+initial
+  begin
+    $dumpfile("dump.vcd");
+    $dumpvars(1);
+ end
+  
+initial 
+ begin
+  CLK=1;
+  forever #10 CLK = ~CLK;  
+ end 
+  
+initial 
+  begin 
+    S= 1; R= 0;
+    #20; 
+    S= 0; R= 1; 
+    #20; 
+    S= 0; R= 0; 
+    #20; 
+    S= 1; R= 1; 
+    #20;
+    $finish;
+end 
+
+initial
+ $monitor("simtime = %g, CLK = %b, S = %b, R = %b, Q = %b, QBAR = %b", $time, CLK, S, R, Q, QBAR);
+endmodule
