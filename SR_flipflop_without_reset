@@ -1,0 +1,26 @@
+///100 Days of RTL///
+
+///Abilash P///
+
+///SR Flipflop without reset///
+
+module sr_flipflop (CLK, S, R, Q, QBAR);
+  
+  input  CLK, S, R;
+  output reg Q;
+  output wire QBAR;
+  
+  always @(posedge CLK)
+    begin
+      case ({S,R})
+        2'b00  : Q = Q;
+        2'b01  : Q = 1'b0;
+        2'b10  : Q = 1'b1;
+        2'b11  : Q = 1'bx;
+        default: Q = Q;
+      endcase
+    end
+   
+  assign QBAR = ~Q;
+  
+endmodule
